@@ -16,6 +16,8 @@ class date_correction(object):
         """
         try:
             if date is not None and date == date:
+                if re.match('\d{4}\Z', str(date):
+                    return '%d/01' % int(date) if remove_day else '%d/01/01' % int(date)
                 y, m, d = None, None, None  # 初期化
 
                 """ datetime型のときはdate型の文字列に変更 """

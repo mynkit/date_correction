@@ -2,6 +2,9 @@
 
 日付をフォーマットを統一する('yyyy/mm/dd'型もしくは'yyyy/mm'型にする)
 
+# version
+0.0.2
+
 # install
 
 ```shell

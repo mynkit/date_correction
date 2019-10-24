@@ -9,7 +9,7 @@ def _requires_from_file(filename):
 
 setup(
     name="date_correction",
-    version="0.0.1",
+    version="0.0.2",
     python_requires=">=3.5",
     author='mynkit',
     author_email='dcm5124289@gmail.com',
