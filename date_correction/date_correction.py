@@ -16,12 +16,10 @@ class date_correction(object):
         """
         try:
             if date is not None and date == date:
-                if re.match('\d{4}\Z', str(date):
-                    return '%d/01' % int(date) if remove_day else '%d/01/01' % int(date)
                 y, m, d = None, None, None  # 初期化
 
                 """ datetime型のときはdate型の文字列に変更 """
-                if type(date) == type(datetime.datetime(1991, 1, 1)):
+                if type(date) is datetime.datetime:
                     date = str(date.date())
                 date = str(date)
                 # datetime型を文字列にしてあった場合に対応
@@ -39,6 +37,9 @@ class date_correction(object):
                             d = "%02d" % int(d)
                         elif len(ymd) == 2:  # 年月まで存在する場合
                             [y, m] = ymd
+                        elif len(ymd) == 1:
+                            [y] = ymd
+                            m = 1
                         y = "%04d" % (int(y) + 2018)
                         m = "%02d" % int(m)
                     if sum([int(v in date) for v in ["平成", "H", "h"]]) == 1:  # 平成のとき
@@ -47,6 +48,9 @@ class date_correction(object):
                             d = "%02d" % int(d)
                         elif len(ymd) == 2:  # 年月まで存在する場合
                             [y, m] = ymd
+                        elif len(ymd) == 1:
+                            [y] = ymd
+                            m = 1
                         y = "%04d" % (int(y) + 1988)
                         m = "%02d" % int(m)
                     if sum([int(v in date) for v in ["昭和", "S", "s"]]) == 1:  # 昭和のとき
@@ -55,6 +59,9 @@ class date_correction(object):
                             d = "%02d" % int(d)
                         elif len(ymd) == 2:  # 年月まで存在する場合
                             [y, m] = ymd
+                        elif len(ymd) == 1:
+                            [y] = ymd
+                            m = 1
                         y = "%04d" % (int(y) + 1925)
                         m = "%02d" % int(m)
                     if sum([int(v in date) for v in ["大正", "T", "t"]]) == 1:  # 大正のとき
@@ -63,6 +70,9 @@ class date_correction(object):
                             d = "%02d" % int(d)
                         elif len(ymd) == 2:  # 年月まで存在する場合
                             [y, m] = ymd
+                        elif len(ymd) == 1:
+                            [y] = ymd
+                            m = 1
                         y = "%04d" % (int(y) + 1911)
                         m = "%02d" % int(m)
                     if sum([int(v in date) for v in ["明治", "M", "m"]]) == 1:  # 明治のとき
@@ -71,6 +81,9 @@ class date_correction(object):
                             d = "%02d" % int(d)
                         elif len(ymd) == 2:  # 年月まで存在する場合
                             [y, m] = ymd
+                        elif len(ymd) == 1:
+                            [y] = ymd
+                            m = 1
                         y = "%04d" % (int(y) + 1867)
                         m = "%02d" % int(m)
 
@@ -86,6 +99,9 @@ class date_correction(object):
                         d = "%02d" % int(d)
                     elif len(ymd) == 2:  # 年月まで存在する場合
                         [y, m] = ymd
+                    elif len(ymd) == 1:
+                        [y] = ymd
+                        m = 1
                     y = "%04d" % int(y)
                     m = "%02d" % int(m)
 
