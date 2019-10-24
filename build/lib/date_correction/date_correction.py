@@ -7,7 +7,7 @@ class date_correction(object):
     @staticmethod
     def jap_to_west(date, remove_day=False):
         '''令和平成昭和大正明治,RHSTM表記の和暦を含めて西暦に変換する関数(西暦そのものをつっこんでもよい)
-        
+
         return:
             if remove==False:
                 'yyyy/mm/dd'

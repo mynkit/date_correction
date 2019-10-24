@@ -1,3 +1,7 @@
+'''日付をフォーマット化して返すクラスの作成
+'''
+
+
 import re
 import traceback
 import datetime
@@ -7,12 +11,27 @@ class date_correction(object):
     @staticmethod
     def jap_to_west(date, remove_day=False):
         '''令和平成昭和大正明治,RHSTM表記の和暦を含めて西暦に変換する関数(西暦そのものをつっこんでもよい)
-        
-        return:
-            if remove==False:
-                'yyyy/mm/dd'
-            if remove==True:
-                'yyyy/mm'
+
+        Args:
+            date (datetime.datetime or int or str): 変換したい日付文字列
+            remove_day (bool): 日付まで返すか，月までで十分か
+
+        Returns:
+            str : 'yyyy/mm/dd' or 'yyyy/mm'
+
+        Examples:
+            >>> from date_correction import date_correction
+            >>> corrector = date_correction()
+            >>> corrector.jap_to_west(1991)
+            '1991'
+            >>> corrector.jap_to_west('令和元年6月')
+            '2019/06/01'
+            >>> corrector.jap_to_west('1991/12/25', remove_day=True)
+            '1991/12'
+            >>> import datetime
+            >>> corrector.jap_to_west(datetime.datetime(2000,1,15))
+            '2000/01/15'
+
         '''
         try:
             if date is not None and date == date:
@@ -23,11 +42,11 @@ class date_correction(object):
                     date = str(date.date())
                 date = str(date)
                 # datetime型を文字列にしてあった場合に対応
-                date = re.sub('\d+:\d+:\d+', '', date)
+                date = re.sub(r'\d+:\d+:\d+', '', date)
 
                 date = date.replace('元', '1')  # 元年は1年に変換
-                date = re.sub('\s', '', date)  # 空欄は消す
-                ymd = re.split('\D', date)
+                date = re.sub(r'\s', '', date)  # 空欄は消す
+                ymd = re.split(r'\D', date)
                 ymd = [v for v in ymd if v != '']
                 if sum([int(v in date) for v in ['令和', '平成', '昭和', '大正', '明治', 'R', 'H', 'S', 'T', 'M', 'r', 'h', 's', 't', 'm']]) == 1:
                     ''' dateが和暦だった場合の処理 '''
@@ -89,10 +108,10 @@ class date_correction(object):
 
                 else:
                     ''' dateが西暦表記だったとき '''
-                    if re.match('\d{6}', date):
+                    if re.match(r'\d{6}', date):
                         y = date[0:4]
                         m = date[4:6]
-                        if re.match('\d{8}', date):
+                        if re.match(r'\d{8}', date):
                             d = date[6:8]
                     if len(ymd) == 3:  # 年月日まで存在する場合
                         [y, m, d] = ymd
