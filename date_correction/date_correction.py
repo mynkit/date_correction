@@ -137,13 +137,3 @@ class date_correction(object):
             print(date)
             return None
 
-
-if __name__ == '__main__':
-    date_list = ['令和元年5月1日', 'H3.5.4', '2002-1-4',
-                 '1991-12-18 00:00:00', '明治14年12月', '20181111', 20190505, '2004/1/3']
-    correction = date_correction()
-    for date in date_list:
-        print(date)
-        date = correction.jap_to_west(date)
-        print('↓↓↓↓↓↓↓↓↓↓')
-        print(date)
